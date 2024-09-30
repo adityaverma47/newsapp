@@ -53,99 +53,97 @@ class _Category extends State<Category> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     getNewsByQuery(widget.Query);
-
+    super.initState();
   }
 
   @override
   Widget build (BuildContext context) {
     return Scaffold(
       appBar:  AppBar(
-        title: Text("Category_News"),
+        title:const Text("Category_News"),
         centerTitle: true,
-
+        backgroundColor: Colors.green,
       ),
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-              children: [
-          Container(
-          margin : EdgeInsets.fromLTRB(15, 25, 0, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Column(
             children: [
+        Container(
+        margin :const EdgeInsets.fromLTRB(15, 25, 0, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
 
-              Text(widget.Query , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 28
-              ),),
+            Text(widget.Query , style: const TextStyle(fontWeight: FontWeight.bold , fontSize: 28
+            ),),
+          ],
+        ),
+            ),
+            isLoading ? SizedBox( height: MediaQuery.of(context).size.height, child: const Center(
+      child: CircularProgressIndicator(),
+            ),):
+            ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: newsModelList.length,
+          itemBuilder: (context, index) {
+
+            try{
+            return Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  elevation: 1.0,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.network(newsModelList[index].newsImg ,fit: BoxFit.fitHeight, height: 230,width: double.infinity, )),
+
+                      Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          child: Container(
+
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  gradient: LinearGradient(
+                                      colors: [
+                                        Colors.black12.withOpacity(0),
+                                        Colors.black
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter
+                                  )
+                              ),
+                              padding: const EdgeInsets.fromLTRB(15, 15, 10, 8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    newsModelList[index].newsHead,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(newsModelList[index].newsDes.length > 50 ? "${newsModelList[index].newsDes.substring(0,55)}...." : newsModelList[index].newsDes , style: TextStyle(color: Colors.white , fontSize: 12)
+                                    ,)
+                                ],
+                              )))
+                    ],
+                  )),
+            );
+          }
+          catch(e){
+          print(e);
+          return Container();
+          }
+          }),
             ],
           ),
-      ),
-      isLoading ? Container( height: MediaQuery.of(context).size.height, child: Center(
-        child: CircularProgressIndicator(),
-      ),):
-      ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: newsModelList.length,
-            itemBuilder: (context, index) {
-
-              try{
-              return Container(
-                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    elevation: 1.0,
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.network(newsModelList[index].newsImg ,fit: BoxFit.fitHeight, height: 230,width: double.infinity, )),
-
-                        Positioned(
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            child: Container(
-
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    gradient: LinearGradient(
-                                        colors: [
-                                          Colors.black12.withOpacity(0),
-                                          Colors.black
-                                        ],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter
-                                    )
-                                ),
-                                padding: EdgeInsets.fromLTRB(15, 15, 10, 8),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      newsModelList[index].newsHead,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(newsModelList[index].newsDes.length > 50 ? "${newsModelList[index].newsDes.substring(0,55)}...." : newsModelList[index].newsDes , style: TextStyle(color: Colors.white , fontSize: 12)
-                                      ,)
-                                  ],
-                                )))
-                      ],
-                    )),
-              );
-    } catch(e){
-    print(e); return Container();
-    }
-            }),
-      ],
-    ),
-        ),
       )
       
     );
