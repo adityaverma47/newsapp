@@ -1,29 +1,28 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-class NewsView extends StatefulWidget {
 
+class NewsView extends StatefulWidget {
   String url;
-  NewsView(this.url);
+  NewsView(this.url, {super.key});
   @override
   NewsViewState createState() => NewsViewState();
 }
 
 class NewsViewState extends State<NewsView> {
-  late  String finalUrl;
-  final Completer<WebViewController> controller = Completer<WebViewController>();
+  late String finalUrl;
+  final Completer<WebViewController> controller =
+      Completer<WebViewController>();
   @override
   void initState() {
-    if(widget.url.toString().contains("http://"))
-    {
+    if (widget.url.toString().contains("http://")) {
       finalUrl = widget.url.toString().replaceAll("http://", "https://");
-    }
-    else{
+    } else {
       finalUrl = widget.url;
     }
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var JavascriptMode;
@@ -35,7 +34,7 @@ class NewsViewState extends State<NewsView> {
         child: WebView(
           initialUrl: finalUrl,
           javascriptMode: JavascriptMode.unrestricted,
-          onWebViewCreated: (WebViewController webViewController){
+          onWebViewCreated: (WebViewController webViewController) {
             setState(() {
               controller.complete(webViewController);
             });
@@ -46,5 +45,8 @@ class NewsViewState extends State<NewsView> {
   }
 }
 
-WebView({required String initialUrl, required javascriptMode, required Null Function(WebViewController webViewController) onWebViewCreated}) {
-}
+WebView(
+    {required String initialUrl,
+    required javascriptMode,
+    required Null Function(WebViewController webViewController)
+        onWebViewCreated}) {}

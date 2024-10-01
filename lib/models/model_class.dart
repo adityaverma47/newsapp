@@ -1,4 +1,3 @@
-
 class NewsQueryModel
 {
   late String newsHead;

@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:daily_news/category_news.dart';
-import 'package:daily_news/newsview.dart';
+import 'package:daily_news/presentation/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart';
-import "model_class.dart";
+import '../../models/model_class.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -42,6 +42,23 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Daily News"),
         backgroundColor: Colors.green,
         centerTitle: true,
+        actions: [
+          Container(
+            margin:const EdgeInsets.only(right: 8),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfilePage()));
+              },
+              child: CircleAvatar(
+                radius: 20,
+                child: Icon(Icons.person),
+              ),
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -90,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                                       Category(Query: value)));
                         }
                       },
-                      decoration:const InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none, hintText: "Search Health"),
                     ),
                   )
@@ -130,13 +147,13 @@ class _HomePageState extends State<HomePage> {
                       );
                     })),
             Container(
-              margin:const EdgeInsets.symmetric(vertical: 15),
+              margin: const EdgeInsets.symmetric(vertical: 15),
               child: isLoading
                   ? const SizedBox(
                       height: 200,
                       child: SizedBox(
                           height: 200,
-                          child:Center(child: CircularProgressIndicator())))
+                          child: Center(child: CircularProgressIndicator())))
                   : CarouselSlider(
                       options: CarouselOptions(
                           height: 200, autoPlay: true, enlargeCenterPage: true),
@@ -170,14 +187,15 @@ class _HomePageState extends State<HomePage> {
                                                 begin: Alignment.topCenter,
                                                 end: Alignment.bottomCenter)),
                                         child: Container(
-                                            padding:const EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                                 horizontal: 5, vertical: 10),
                                             child: Container(
-                                                margin: const EdgeInsets.symmetric(
-                                                    horizontal: 10),
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
                                                 child: Text(
                                                   instance.newsHead,
-                                                  style:const TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 18,
                                                       color: Colors.white,
                                                       fontWeight:
@@ -196,8 +214,8 @@ class _HomePageState extends State<HomePage> {
             Column(
               children: [
                 Container(
-                  margin:const EdgeInsets.fromLTRB(15, 25, 0, 0),
-                  child:const Row(
+                  margin: const EdgeInsets.fromLTRB(15, 25, 0, 0),
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
@@ -222,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                         itemBuilder: (context, index) {
                           try {
                             return Container(
-                              margin:const EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 5),
                               child: InkWell(
                                 onTap: () {
@@ -259,26 +277,25 @@ class _HomePageState extends State<HomePage> {
                                                               .withOpacity(0),
                                                           Colors.black
                                                         ],
-                                                        begin: Alignment
-                                                            .topCenter,
+                                                        begin:
+                                                            Alignment.topCenter,
                                                         end: Alignment
                                                             .bottomCenter)),
-                                                padding: const EdgeInsets.fromLTRB(
-                                                    15, 15, 10, 8),
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        15, 15, 10, 8),
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       newsModelList[index]
                                                           .newsHead,
-                                                      style:const TextStyle(
+                                                      style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 18,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                              FontWeight.bold),
                                                     ),
                                                     Text(
                                                       newsModelList[index]
@@ -286,10 +303,9 @@ class _HomePageState extends State<HomePage> {
                                                                   .length >
                                                               50
                                                           ? "${newsModelList[index].newsDes.substring(0, 55)}...."
-                                                          : newsModelList[
-                                                                  index]
+                                                          : newsModelList[index]
                                                               .newsDes,
-                                                      style:const TextStyle(
+                                                      style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 12),
                                                     )
@@ -378,9 +394,10 @@ class _HomePageState extends State<HomePage> {
       print("Exception GetIndia: ${e.toString()}");
     }
   }
+
   @override
   void dispose() {
-   searchController.clear();
+    searchController.clear();
     super.dispose();
   }
 }
