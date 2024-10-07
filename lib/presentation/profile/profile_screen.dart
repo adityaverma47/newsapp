@@ -4,15 +4,15 @@ import 'package:daily_news/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     ProfileController controller = Get.put(ProfileController());
 
     return Scaffold(
-      appBar: const CustomAppBar(height: 50,title: Text("Profile Screen"), bgColor: Colors.green,leadIcon: Icon(Icons.arrow_back),),
+      appBar: const CustomAppBar(height: 50,title: Text("Profile Screen"), bgColor: Colors.green,),
       body: Column(
         children: [
           Container(

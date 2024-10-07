@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:daily_news/presentation/homepage/homepage.dart';
+import 'package:daily_news/presentation/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,13 +12,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
   @override
   void initState() {
     super.initState();
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomePage())));
+            MaterialPageRoute(builder: (context) => const LoginScreen())));
   }
 
   @override
@@ -32,8 +34,8 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 280,
-                width: 150,
+                height: 380,
+                width: 250,
                 color: Colors.white,
                 child: Center(
                   child: Image.asset(

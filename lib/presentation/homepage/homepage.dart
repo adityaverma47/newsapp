@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController searchController = new TextEditingController();
+  TextEditingController searchController = TextEditingController();
   List<NewsQueryModel> newsModelList = <NewsQueryModel>[];
   List<NewsQueryModel> newsModelListCarousel = <NewsQueryModel>[];
   List<String> navBarItem = [
@@ -29,7 +29,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getNewsByQuery();
     getNewsOfIndia();
@@ -50,9 +49,9 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const ProfilePage()));
+                        builder: (context) => const ProfileScreen()));
               },
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 radius: 20,
                 child: Icon(Icons.person),
               ),
@@ -345,7 +344,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  getNewsByQuery() async {
+  Future<void> getNewsByQuery() async {
     Map element;
     int i = 0;
     String url =
@@ -374,7 +373,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  getNewsOfIndia() async {
+  Future<void> getNewsOfIndia() async {
     try {
       String url =
           "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=fde2b72a01bb413bb95c091f8de4abfd";
