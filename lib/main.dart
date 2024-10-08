@@ -1,4 +1,3 @@
-import 'package:daily_news/presentation/splash/splash_screen.dart';
 import 'package:daily_news/routes/app_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,9 +33,9 @@ class MyApp extends StatelessWidget {
         return DismissKeyboard(
           child: GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: AppRoutes.loginScreen,
+            initialRoute: AppRoutes.initialRoute,
+            getPages: AppRoutes.pages,
             title: "Daily_News",
-            home: const SplashScreen(),
           ),
         );
       },
