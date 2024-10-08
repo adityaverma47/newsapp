@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'color_constant.dart';
+import '../../core/utils/color_constant.dart';
+
+
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const CustomAppBar(
-      {super.key, required this.height,
+      {super.key,
+         this.height,
         this.styleType,
         this.styleTypeTwo,
         this.leadingWidth,
@@ -16,12 +19,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         this.actions,
         this.leadIcon, this.bgColor});
 
-  final double height;
+  final double? height;
+
   final Widget? leadIcon;
+
   final Style? styleType;
+
   final String? styleTypeTwo;
+
   final double? leadingWidth;
+
   final Color? bgColor;
+
   final Widget? leading;
 
   final bool? isBackBtnVisible;
@@ -33,9 +42,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? centerTitle;
 
   final List<Widget>? actions;
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +68,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size(double.maxFinite, height);
+  Size get preferredSize => Size(double.maxFinite, height!);
 
   getStyle(){
     switch(styleType){

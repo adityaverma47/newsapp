@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:daily_news/presentation/homepage/homepage.dart';
 import 'package:daily_news/presentation/login/login_screen.dart';
 import 'package:flutter/material.dart';
 

@@ -1,8 +1,9 @@
 import 'dart:io';
+import 'package:daily_news/core/utils/logger.dart';
 import 'package:daily_news/presentation/profile/profile_Controller.dart';
-import 'package:daily_news/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../widgets/appbar/custom_app_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -20,6 +21,7 @@ class ProfileScreen extends StatelessWidget {
             child: Center(
               child: InkWell(
                 onTap: (){
+                  LogMode.debug;
                   controller.getImage();
                 },
                 child: CircleAvatar(
